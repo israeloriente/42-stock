@@ -1,0 +1,7 @@
+{
+  "name": "42-stock",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

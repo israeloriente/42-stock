@@ -3,6 +3,7 @@ import { Parse } from "parse";
 import { environment } from "../../environments/environment";
 import { Mail } from "../interface/mail";
 import { Product } from "../interface/product";
+import { User } from "../interface/user";
 import { GlobalService } from "./global.service";
 
 @Injectable({
@@ -25,6 +26,19 @@ export class BackendService {
 
   //                           @@@@@@@@@@@@@@@@@@@@ Parse CLOUD @@@@@@@@@@@@@@@@@@@@
   async userIsAdm() { return await Parse.Cloud.run('userIsAdm') }
+  /**  
+  * Create User from Database.
+  * @returns Parse Object User Created.
+  */
+  public async createUser(usr: User) { return await Parse.Cloud.run('createUser', {
+    name: usr.name,
+    email: usr.email,
+  }) }
+  /**  
+  * Destroy User from Database.
+  * @returns Parse Object User destroyed.
+  */
+  public async deleteUserCloud(usr: User) { return await Parse.Cloud.run('destroyUser', {userId: usr.id}) }
 
   //                           @@@@@@@@@@@@@@@@@@@@ AUTH @@@@@@@@@@@@@@@@@@@@
   /**  
@@ -75,7 +89,7 @@ export class BackendService {
     * Function delete objects globally (any class)
     * @returns Parse Object deleted.
   */
-  public async deleteObject(className: string, obj: Mail | Product) {
+  public async deleteObject(className: string, obj: Mail | Product | User) {
     const query = new Parse.Query(className);
     const object = await query.get(obj.id);
     return await object.destroy();
@@ -140,10 +154,34 @@ export class BackendService {
     return await object.destroy();
   }
 
-  // @@@@@@@@@@@@@@@@@@@@ Parse Users @@@@@@@@@@@@@@@@@@@@
+  //                    @@@@@@@@@@@@@@@@@@@@ Parse Users @@@@@@@@@@@@@@@@@@@@
   async getCurrentUser() {
     return await Parse.User.current();
   }
+  /**  
+  * User list from Database.
+  * @returns Parse List User class.
+  */
+  public async getUsers() {
+    const query = await new Parse.Query(Parse.Object.extend("User"));
+    // Ignore current user
+    query.notEqualTo('objectId', (await this.getCurrentUser()).id);
+    return await query.find();
+  }
+  /**  
+  * Update User Object.
+  * @returns User updated.
+  */
+  public async UpdateUser(usr: User) {
+    const User: Parse.User = new Parse.User();
+    const query: Parse.Query = new Parse.Query(User);
+    let user: Parse.Object = await query.get(usr.id);
+    user.set('username', usr.email);
+    user.set('email', usr.email);
+    user.set('name', usr.name);
+    return await user.save();
+  }
+
 
   // @@@@@@@@@@@@@@@@@@@@ Parse Validators @@@@@@@@@@@@@@@@@@@@
   public erroValidators(error: any) {

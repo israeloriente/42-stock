@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Mail } from 'src/app/interface/mail';
 import { Product } from 'src/app/interface/product';
+import { User } from 'src/app/interface/user';
 import { BackendService } from 'src/app/service/backend.service';
 import { GlobalService } from 'src/app/service/global.service';
 
@@ -12,12 +13,16 @@ import { GlobalService } from 'src/app/service/global.service';
 })
 export class AddModalComponent {
 
-  public type: 'Mail' | 'Product';
+  public type: 'Mail' | 'Product' | 'User';
   public param;
 
   public product: Product = {
     name: '',
     barcodeId: ''
+  }
+  public user: User = {
+    name: '',
+    email: ''
   }
   public mail: Mail = { email: '' }
 
@@ -35,6 +40,10 @@ export class AddModalComponent {
     case 'Product':
       if (this.param)
         this.product = { name: this.param.get('name'), barcodeId: this.param.get('barcodeId'), id: this.param.id}
+      break;
+    case 'User':
+      if (this.param)
+        this.user = { name: this.param.get('name'), email: this.param.get('email'), id: this.param.id}
       break;
   
     default:
@@ -60,23 +69,23 @@ export class AddModalComponent {
             this.global.loadEnd();
           });
         else
-          this.db.createEmail(this.mail).then((res) => {
-            this.modal.dismiss(res);
-          }).catch(error => {
-            this.global.showToast(this.db.erroValidators(error), 5000);
-            this.global.loadEnd();
-          });
+        this.db.createProduct(this.product).then((res) => {
+          this.modal.dismiss(res);
+        }).catch(error => {
+          this.global.showToast(this.db.erroValidators(error), 5000);
+          this.global.loadEnd();
+        });
         break;
-      case 'Product':
-        if (this.product.id)
-          this.db.updateProduct(this.product).then((res) => {
+      case 'User':
+        if (this.user.id)
+          this.db.UpdateUser(this.user).then((res) => {
             this.modal.dismiss(res);
           }).catch(error => {
             this.global.showToast(this.db.erroValidators(error), 5000);
             this.global.loadEnd();
           });
         else
-        this.db.createProduct(this.product).then((res) => {
+        this.db.createUser(this.user).then((res) => {
           this.modal.dismiss(res);
         }).catch(error => {
           this.global.showToast(this.db.erroValidators(error), 5000);

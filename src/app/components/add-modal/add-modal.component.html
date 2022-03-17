@@ -37,4 +37,17 @@
     </ion-list>
   </div>
 
+  <div *ngIf="type == 'User'">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name*</ion-label>
+          <ion-input [(ngModel)]="user.name" (keyup.enter)="email.setFocus()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email*</ion-label>
+          <ion-input #email [(ngModel)]="user.email" (keyup.enter)="saveObject()"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>

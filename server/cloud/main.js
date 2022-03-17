@@ -1,15 +1,19 @@
 var parse = require("./parse-service");
 
 
-//                                      @@@ USER @@@
+//                                      @@@@@@@@@@@@@@@@@@@@ USER @@@@@@@@@@@@@@@@@@@@
 Parse.Cloud.define("userIsAdm", async (request) => { return await parse.userIsAdm(request)});
+Parse.Cloud.define("createUser", async (request) => { return await parse.createUser(request)});
+Parse.Cloud.define("destroyUser", async (request) => { return await parse.destroyUser(request)});
 
 
-// @@@@@@@@@@@@@@@@@@@@ EVENTS HOOKS @@@@@@@@@@@@@@@@@@@@
-// Execulta toda vez que "User" muda
-Parse.Cloud.beforeSave(Parse.User, (req) => {
-    // Bloqueia qualquer alteração em typeUser
-    if (!req.master && req.object.op('typeUser')) throw new Error( 'Você não tem permissão');
+//                                      @@@@@@@@@@@@@@@@@@@@ EVENTS HOOKS @@@@@@@@@@@@@@@@@@@@
+// Define User ACL
+Parse.Cloud.beforeSave(Parse.User, (request) => {
+    const ACL = new Parse.ACL();
+    ACL.setRoleWriteAccess('Admin', true);
+    ACL.setRoleReadAccess('Admin', true);
+    request.object.setACL(ACL);
 });
 
 // Define Product ACL

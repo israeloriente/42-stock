@@ -1,0 +1,175 @@
+import { Injectable } from "@angular/core";
+import { Parse } from "parse";
+import { environment } from "../../environments/environment";
+import { Mail } from "../interface/mail";
+import { Product } from "../interface/product";
+import { GlobalService } from "./global.service";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BackendService {
+  constructor(
+    private global: GlobalService,
+  ) {
+    this.initializeDatabase();
+  }
+
+  private initializeDatabase() {
+    Parse.serverURL = environment.Parse.serverURL;
+    Parse.initialize(
+      environment.Parse.applicationId,
+      environment.Parse.jsKey
+    );
+  }
+
+  //                           @@@@@@@@@@@@@@@@@@@@ Parse CLOUD @@@@@@@@@@@@@@@@@@@@
+  async userIsAdm() { return await Parse.Cloud.run('userIsAdm') }
+
+  //                           @@@@@@@@@@@@@@@@@@@@ AUTH @@@@@@@@@@@@@@@@@@@@
+  /**  
+    * Returns the average of two numbers.
+    * @param username - Username passed by loginComponent.
+    * @param password - Password passed by loginComponent.
+    * @returns Promise of User object.
+  */
+  public async login(username: string, password: string) {
+    const user = await Parse.User.logIn(username, password);
+    const query = new Parse.Query(new Parse.User());
+    query.include('*');
+    query.equalTo('objectId', user.id)
+    return await query.first();
+  }
+  /**  
+    * Email address for password recovery.
+    * @param email - Email address.
+    * @returns Promise with Parse Object.
+  */
+  async resetPassword(email) {
+    // Pass the username and password to logIn function
+    return await Parse.User.requestPasswordReset(email);
+  }
+  /**  
+    * Remove user data / session.
+    * @param confirm - Decide whether or not to ask the user to exit (Optional).
+    * @returns NULL.
+  */
+  async logout(confirm?) {
+    if (confirm) {
+      this.global.confirmAlert('Are you sure?', 'Your session will be terminated', 'Leave', 'Cancel').then((response: boolean) => {
+        if (response) {
+          Parse.User.logOut();
+          this.global.goTo('login');
+          this.global.resetStorage();
+        }
+      });
+    } else {
+      Parse.User.logOut();
+      this.global.goTo('login');
+      this.global.resetStorage();
+    }
+  }
+
+  //                           @@@@@@@@@@@@@@@@@@@@ GLOBAL CLASS @@@@@@@@@@@@@@@@@@@@
+  /**  
+    * Function delete objects globally (any class)
+    * @returns Parse Object deleted.
+  */
+  public async deleteObject(className: string, obj: Mail | Product) {
+    const query = new Parse.Query(className);
+    const object = await query.get(obj.id);
+    return await object.destroy();
+  }
+
+  //                           @@@@@@@@@@@@@@@@@@@@ EMAIL @@@@@@@@@@@@@@@@@@@@
+  /**  
+    * Email list from Database.
+    * @returns Parse List Email.
+  */
+  public async getEmails() {
+    const query = await new Parse.Query(Parse.Object.extend("Mail"));
+    return await query.find();
+  }
+  /**  
+    * Create a new email object to Database.
+    * @returns Parse new email object.
+  */
+  public async createEmail(mail: Mail) {
+    const newProduct = new Parse.Object("Mail");
+    newProduct.set("email", mail.email);
+    return await newProduct.save();
+  }
+
+  //                           @@@@@@@@@@@@@@@@@@@@ PRODUCT @@@@@@@@@@@@@@@@@@@@
+  /**  
+    * Product list from Database.
+    * @returns Parse List Product class.
+  */
+  public async getProduct() {
+    const query = await new Parse.Query(Parse.Object.extend("Product"));
+    return await query.find();
+  }
+  /**  
+    * Create a new product object to Database.
+    * @returns Parse new object.
+  */
+  public async createProduct(product: Product) {
+    const newProduct = new Parse.Object("Product");
+    newProduct.set("name", product.name);
+    newProduct.set("barcodeId", product.barcodeId);
+    return await newProduct.save();
+  }
+  /**  
+    * Update an existing object.
+    * @returns Parse object.
+  */
+  public async updateProduct(product: Product) {
+    const query: Parse.Query = new Parse.Query('Product');
+    const object: Parse.Object = await query.get(product.id);
+    object.set('name', product.name);
+    object.set('barcodeId', product.barcodeId);
+    return await object.save();
+  }
+  /**  
+    * Product list from Database.
+    * @returns Object destroyed.
+  */
+  public async deleteProduct(email: Mail) {
+    const query = new Parse.Query('Product');
+    const object = await query.get(email.id);
+    return await object.destroy();
+  }
+
+  // @@@@@@@@@@@@@@@@@@@@ Parse Users @@@@@@@@@@@@@@@@@@@@
+  async getCurrentUser() {
+    return await Parse.User.current();
+  }
+
+  // @@@@@@@@@@@@@@@@@@@@ Parse Validators @@@@@@@@@@@@@@@@@@@@
+  public erroValidators(error: any) {
+    // retornamos o valor porque podemos querer mostrar alem do toast
+    switch (error.message) {
+      case 'XMLHttpRequest failed: "Unable to connect to the Parse API"':
+        return 'Unable to connect';
+      case 'you must provide an email':
+        return 'You need to enter an email address.';
+      case 'Invalid username/password.':
+        return 'Invalid username/password.';
+      case 'username/email is required.':
+        return 'Email is mandatory';
+      case 'password is required.':
+        return 'Password is mandatory';
+      case 'Account already exists for this username.':
+        return 'Account already exists for this username.';
+      case 'Permission denied, user needs to be authenticated.':
+        return 'You must be logged in';
+      case 'no_session':
+        this.logout(false);
+        return 'You must be logged in';
+      default:
+        if (error.code == 119) return 'Permission denied 😅';
+        return error.message;
+    }
+  }
+
+}

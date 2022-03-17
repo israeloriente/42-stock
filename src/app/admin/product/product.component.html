@@ -1,15 +1,35 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Products</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" *ngIf="canSelect" (click)="select = true">Select</ion-button>
+      <ion-button color="primary" *ngIf="noDataFound" (click)="getProduct()">
+        <ion-icon name="reload"></ion-icon>
+      </ion-button>
+      <div *ngIf="select">
+        <ion-button color="danger" [disabled]="!selectList.length" (click)="deleteProducts()">Delete</ion-button>
+        <ion-button color="primary" (click)="cancelSeletion()">Cancel</ion-button>
+      </div>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <p class="centralizeTotal" *ngIf="noDataFound">No data</p>
+  <p class="centralizeTotal" *ngIf="isLoading">Loading</p>
+
+  <ion-list>
+    <ion-item button *ngFor="let p of products ; let i = index" (click)="openModal(p)">
+      <ion-label>{{p.get('name')}} <span *ngIf="p.get('barcodeId')">- {{p.get('barcodeId')}}</span> </ion-label>
+      <ion-button slot="end" fill="outline" color=danger *ngIf="!select" (click)="deleteProduct(p)">Delete</ion-button>
+      <ion-checkbox color="primary" (ionChange)="checkboxChanged($event, i)" *ngIf="select"></ion-checkbox>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="openModal()">
+  <ion-fab-button [disabled]="!canSelect">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

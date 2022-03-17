@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="modal.dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{type}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveObject()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="type == 'Product'">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name*</ion-label>
+          <ion-input [(ngModel)]="product.name" (keyup.enter)="barcode.setFocus()" autofocus></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Barcode</ion-label>
+          <ion-input #barcode [(ngModel)]="product.barcodeId" (keyup.enter)="saveObject()"></ion-input>
+          <!-- <ion-button>scan</ion-button> -->
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+</ion-content>

@@ -19,6 +19,7 @@ export class AddModalComponent {
     name: '',
     barcodeId: ''
   }
+  public mail: Mail = { email: '' }
 
   constructor(
     private db: BackendService,
@@ -50,6 +51,22 @@ export class AddModalComponent {
   public saveObject() {
     this.global.loadInit();
     switch (this.type) {
+      case 'Mail':
+        if (this.mail.id)
+          this.db.updateEmail(this.mail).then((res) => {
+            this.modal.dismiss(res);
+          }).catch(error => {
+            this.global.showToast(this.db.erroValidators(error), 5000);
+            this.global.loadEnd();
+          });
+        else
+          this.db.createEmail(this.mail).then((res) => {
+            this.modal.dismiss(res);
+          }).catch(error => {
+            this.global.showToast(this.db.erroValidators(error), 5000);
+            this.global.loadEnd();
+          });
+        break;
       case 'Product':
         if (this.product.id)
           this.db.updateProduct(this.product).then((res) => {

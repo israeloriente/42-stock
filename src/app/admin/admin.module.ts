@@ -9,6 +9,7 @@ import { AdminPageRoutingModule } from './admin-routing.module';
 import { AdminPage } from './admin.page';
 import { ProductComponent } from './product/product.component';
 import { CooperatorComponent } from './cooperator/cooperator.component';
+import { MailComponent } from './mail/mail.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { CooperatorComponent } from './cooperator/cooperator.component';
     AdminPage,
     ProductComponent,
     CooperatorComponent
+    MailComponent,
   ]
 })
 export class AdminPageModule {}

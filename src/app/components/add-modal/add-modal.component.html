@@ -28,5 +28,13 @@
     </ion-list>
   </div>
 
+  <div *ngIf="type == 'Mail'">
+    <ion-list>
+      <ion-item>
+        <ion-label>Email*</ion-label>
+          <ion-input [(ngModel)]="mail.email"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
 
 </ion-content>

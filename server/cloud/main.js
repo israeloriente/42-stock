@@ -20,3 +20,11 @@ Parse.Cloud.beforeSave("Product", (request) => {
     ACL.setRoleWriteAccess('Admin', true);
     request.object.setACL(ACL);
 });
+// Define Mail ACL
+Parse.Cloud.beforeSave("Mail", (request) => {
+    if (!request.user) throw new Error( 'no_session');
+    const ACL = new Parse.ACL();
+    ACL.setRoleReadAccess('Admin', true);
+    ACL.setRoleWriteAccess('Admin', true);
+    request.object.setACL(ACL);
+});

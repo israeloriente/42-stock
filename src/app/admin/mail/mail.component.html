@@ -1,1 +1,35 @@
-<p>UNDEFINED</p>
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Notifications</ion-title>
+      <ion-buttons slot="end">
+          <ion-button color="primary" *ngIf="canSelect" (click)="select = true">Select</ion-button>
+          <ion-button color="primary" *ngIf="noDataFound" (click)="getEmails()">
+            <ion-icon name="reload"></ion-icon>
+          </ion-button>
+          <div *ngIf="select">
+            <ion-button color="danger" [disabled]="!selectList.length" (click)="removeEmails()">Delete</ion-button>
+            <ion-button color="primary" (click)="cancelSeletion()">Cancel</ion-button>
+          </div>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+
+    <p class="centralizeTotal" *ngIf="noDataFound">No data</p>
+    <p class="centralizeTotal" *ngIf="isLoading">Loading</p>
+
+    <ion-list>
+        <ion-item *ngFor="let mail of email ; let i = index">
+            <ion-label>{{mail.get('email')}}</ion-label>
+            <ion-button slot="end" fill="outline" color=danger *ngIf="!select" (click)="removeEmail(mail)">Delete</ion-button>
+            <ion-checkbox color="primary" (ionChange)="checkboxChanged($event, i)" *ngIf="select"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+  </ion-content>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addEmail()" [disabled]="!canSelect">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>

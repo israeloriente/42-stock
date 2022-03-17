@@ -10,6 +10,7 @@ import { AdminPage } from './admin.page';
 import { ProductComponent } from './product/product.component';
 import { CooperatorComponent } from './cooperator/cooperator.component';
 import { MailComponent } from './mail/mail.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -21,8 +22,9 @@ import { MailComponent } from './mail/mail.component';
   declarations: [
     AdminPage,
     ProductComponent,
-    CooperatorComponent
+    CooperatorComponent,
     MailComponent,
+    SettingsComponent
   ]
 })
 export class AdminPageModule {}

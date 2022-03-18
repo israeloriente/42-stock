@@ -16,20 +16,24 @@
 
 <ion-content>
 
-  <p class="centralizeTotal" *ngIf="noDataFound">No data</p>
-  <p class="centralizeTotal" *ngIf="isLoading">Loading</p>
+  <div class="limitScreen">
+    <p class="centralizeTotal" *ngIf="noDataFound">No data</p>
+    <p class="centralizeTotal" *ngIf="isLoading">Loading</p>
 
-  <ion-list>
-    <ion-item button *ngFor="let p of products ; let i = index" (click)="openModal(p)">
-      <ion-label>{{p.get('name')}} <span *ngIf="p.get('barcodeId')">- {{p.get('barcodeId')}}</span> </ion-label>
-      <ion-button slot="end" fill="outline" color=danger *ngIf="!select" (click)="deleteProduct(p)">Delete</ion-button>
-      <ion-checkbox color="primary" (ionChange)="checkboxChanged($event, i)" *ngIf="select"></ion-checkbox>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-item button *ngFor="let p of products ; let i = index" (click)="openModal(p)">
+        <ion-label>{{p.get('name')}} <span *ngIf="p.get('barcodeId')">- {{p.get('barcodeId')}}</span> </ion-label>
+        <ion-button slot="end" fill="outline" color=danger *ngIf="!select" (click)="deleteProduct(p)">Delete</ion-button>
+        <ion-checkbox color="primary" (ionChange)="checkboxChanged($event, i)" *ngIf="select"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    
+  </div>
+
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="openModal()">
-  <ion-fab-button [disabled]="!canSelect">
+  <ion-fab-button [disabled]="select">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

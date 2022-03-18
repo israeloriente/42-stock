@@ -34,3 +34,9 @@
     margin-right: -50% !important;
     transform: translate(-50%, -50%) !important;
 }
+
+.limitScreen {
+    max-width: 1000px;
+    display: block;
+    margin: auto;
+}

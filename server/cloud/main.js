@@ -18,7 +18,7 @@ Parse.Cloud.beforeSave(Parse.User, (request) => {
 
 // Define Product ACL
 Parse.Cloud.beforeSave("Product", (request) => {
-    if (!request.user) throw new Error( 'no_session');
+    if (!request.user && !request.master) throw new Error( 'no_session');
     const ACL = new Parse.ACL();
     ACL.setRoleReadAccess('Admin', true);
     ACL.setRoleWriteAccess('Admin', true);
@@ -26,7 +26,7 @@ Parse.Cloud.beforeSave("Product", (request) => {
 });
 // Define Mail ACL
 Parse.Cloud.beforeSave("Mail", (request) => {
-    if (!request.user) throw new Error( 'no_session');
+    if (!request.user && !request.master) throw new Error( 'no_session');
     const ACL = new Parse.ACL();
     ACL.setRoleReadAccess('Admin', true);
     ACL.setRoleWriteAccess('Admin', true);

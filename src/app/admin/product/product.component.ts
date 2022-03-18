@@ -27,7 +27,7 @@ export class ProductComponent {
   ) { }
 
   ionViewWillEnter() {
-    // Get email list
+    // Get product list
     this.getProduct();
   }
 
@@ -111,7 +111,7 @@ export class ProductComponent {
   /**  
     * Trigger when checkbox change value.
     * @param ev - Event.
-    * @param index - Index from email list.
+    * @param index - Index from product list.
     * @returns NULL.
   */
   public checkboxChanged(ev, index: number) {

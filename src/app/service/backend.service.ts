@@ -22,6 +22,7 @@ export class BackendService {
       environment.Parse.applicationId,
       environment.Parse.jsKey
     );
+    Parse.CoreManager.set('REQUEST_ATTEMPT_LIMIT', 0);
   }
 
   //                           @@@@@@@@@@@@@@@@@@@@ Parse CLOUD @@@@@@@@@@@@@@@@@@@@
@@ -134,7 +135,7 @@ export class BackendService {
     return await newProduct.save();
   }
   /**  
-    * Update an existing object.
+    * Update an existing product object.
     * @returns Parse object.
   */
   public async updateProduct(product: Product) {
@@ -148,9 +149,9 @@ export class BackendService {
     * Delete product object from database.
     * @returns Object destroyed.
   */
-  public async deleteProduct(email: Mail) {
+  public async deleteProduct(product: Product) {
     const query = new Parse.Query('Product');
-    const object = await query.get(email.id);
+    const object = await query.get(product.id);
     return await object.destroy();
   }
   /**  

@@ -5,12 +5,7 @@ import { AlertController, LoadingController, NavController, ToastController } fr
   providedIn: 'root'
 })
 export class GlobalService {
- 
-  /**
-   * Prevent space character
-   * REGEX.
-  */
-  public blockSpace: RegExp = /[^\s]/;
+
   // Load global
   private loading;
 
@@ -78,6 +73,14 @@ export class GlobalService {
     await alert.present();
     await alert.onWillDismiss();
     return bool;
+  }
+
+  /**
+   * Prevent space character
+   * REGEX.
+  */
+  public removeSpaces(str: string) {
+    return str.replace(/\s/g, '');
   }
 
 

@@ -8,8 +8,7 @@ import { GlobalService } from 'src/app/service/global.service';
 
 @Component({
   selector: 'app-add-modal',
-  templateUrl: './add-modal.component.html',
-  styleUrls: ['./add-modal.component.scss'],
+  templateUrl: './add-modal.component.html'
 })
 export class AddModalComponent {
 
@@ -18,7 +17,8 @@ export class AddModalComponent {
 
   public product: Product = {
     name: '',
-    barcodeId: ''
+    barcodeId: '',
+    qtd: 0
   }
   public user: User = {
     name: '',
@@ -39,7 +39,7 @@ export class AddModalComponent {
   switch (this.type) {
     case 'Product':
       if (this.param)
-        this.product = { name: this.param.get('name'), barcodeId: this.param.get('barcodeId'), id: this.param.id}
+        this.product = { name: this.param.get('name'), barcodeId: this.param.get('barcodeId'), id: this.param.id, qtd: 0}
       break;
     case 'User':
       if (this.param)
@@ -61,8 +61,16 @@ export class AddModalComponent {
     this.global.loadInit();
     switch (this.type) {
       case 'Mail':
-        if (this.mail.id)
-          this.db.updateEmail(this.mail).then((res) => {
+        this.db.createEmail(this.mail).then((res) => {
+          this.modal.dismiss(res);
+        }).catch(error => {
+          this.global.showToast(this.db.erroValidators(error), 5000);
+          this.global.loadEnd();
+        });
+        break;
+      case 'Product':
+        if (this.product.id)
+          this.db.updateProduct(this.product).then((res) => {
             this.modal.dismiss(res);
           }).catch(error => {
             this.global.showToast(this.db.erroValidators(error), 5000);
@@ -85,8 +93,11 @@ export class AddModalComponent {
             this.global.loadEnd();
           });
         else
-        this.db.createUser(this.user).then((res) => {
-          this.modal.dismiss(res);
+        this.db.createUser(this.user).then((user) => {
+          this.db.resetPassword(user.get('email')).then(() => {
+            this.global.showToast('Ask the user to check the mail inbox.', 5000);
+            this.modal.dismiss(user);
+          });
         }).catch(error => {
           this.global.showToast(this.db.erroValidators(error), 5000);
           this.global.loadEnd();

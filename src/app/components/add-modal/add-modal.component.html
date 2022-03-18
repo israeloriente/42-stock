@@ -5,7 +5,7 @@
         <ion-icon name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{type}}</ion-title>
+    <ion-title> {{param ? 'Update' : 'Create'}} {{type}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="saveObject()">Save</ion-button>
     </ion-buttons>
@@ -32,7 +32,7 @@
     <ion-list>
       <ion-item>
         <ion-label>Email*</ion-label>
-          <ion-input [(ngModel)]="mail.email"></ion-input>
+          <ion-input [(ngModel)]="mail.email" (keyup.enter)="saveObject()" onkeypress="return event.charCode != 32"></ion-input>
       </ion-item>
     </ion-list>
   </div>
@@ -45,7 +45,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Email*</ion-label>
-          <ion-input #email [(ngModel)]="user.email" (keyup.enter)="saveObject()"></ion-input>
+          <ion-input #email [(ngModel)]="user.email" (keyup.enter)="saveObject()" onkeypress="return event.charCode != 32"></ion-input>
       </ion-item>
     </ion-list>
   </div>

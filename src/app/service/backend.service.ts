@@ -144,14 +144,66 @@ export class BackendService {
     object.set('barcodeId', product.barcodeId);
     return await object.save();
   }
-  /**  
-    * Product list from Database.
+  /**
+    * Delete product object from database.
     * @returns Object destroyed.
   */
   public async deleteProduct(email: Mail) {
     const query = new Parse.Query('Product');
     const object = await query.get(email.id);
     return await object.destroy();
+  }
+  /**  
+    * Count quantity of products.
+    * @returns Number result.
+  */
+  public async countProduct(product: Product) {
+    const query = await new Parse.Query(Parse.Object.extend("Stock"));
+    query.equalTo('product', { __type: "Pointer", className: "Product", objectId: product.id });
+    return await query.count();
+  }
+
+
+  //                           @@@@@@@@@@@@@@@@@@@@ STOCK @@@@@@@@@@@@@@@@@@@@
+  /**  
+  * Create a new stock object with object associated and who user created to database.
+  * @params product object.
+  * @returns Parse new object.
+  */
+  public async createStock(product: Product) {
+    const newStock = new Parse.Object("Stock");
+    newStock.set("product", { __type: "Pointer", className: "Product", objectId: product.id });
+    newStock.set("addedBy", await this.getCurrentUser());
+    return await newStock.save();
+  }
+  /**  
+  * Destroy first stock found at database.
+  * @params product object to filter.
+  * @returns Object destroyed.
+  */
+  public async deleteFirstStock(product: Product) {
+    const query = await new Parse.Query(Parse.Object.extend("Stock"));
+    query.equalTo("product", { __type: "Pointer", className: "Product", objectId: product.id });
+    const stock = await query.first();
+    return await stock.destroy();
+  }
+  /**  
+    * All stock list from Database.
+    * @returns Parse List Stock class.
+  */
+   public async getStock() {
+    const query = await new Parse.Query(Parse.Object.extend("Stock"));
+    return await query.find();
+  }
+  /**  
+    * Count quantity of products.
+    * @params product object to filter.
+    * @returns Quantity result.
+  */
+   public async countStock(product: Product) {
+    const query = await new Parse.Query(Parse.Object.extend("Stock"));
+    query.equalTo('product', { __type: "Pointer", className: "Product", objectId: product.id });
+    return await query.count();
   }
 
   //                    @@@@@@@@@@@@@@@@@@@@ Parse Users @@@@@@@@@@@@@@@@@@@@

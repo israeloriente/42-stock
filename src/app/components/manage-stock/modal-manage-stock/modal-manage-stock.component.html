@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{product.get('name')}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Div send to server -->
+  <div class="envio" *ngIf="sending">
+    <div *ngIf="!verified">
+      <p style="text-align: center;">Processing...</p>
+      <ion-progress-bar color="primary" [value]="percent"></ion-progress-bar>
+      <p style="text-align: center;">{{sent}} of {{qtd}}</p>
+    </div>
+    <app-verified-svg class="centralizeTotal" *ngIf="verified"></app-verified-svg>
+  </div>
+
+  <!-- Div define quantity  -->
+  <div *ngIf="!sending">
+    <ion-item>
+      <ion-label>Quantity</ion-label>
+      <ion-input type="number" [(ngModel)]="qtd" (keyup.enter)="process()" autofocus></ion-input>
+    </ion-item>
+
+    <p class="warning" *ngIf="cannotRemove">Not capacity</p>
+    <p class="warning" *ngIf="cannotCreate">Too many products</p>
+
+    <div class="button">
+      <ion-button expand="block" fill="clear" [color]="willAdd ? 'success' : 'danger' " (click)="process()"
+        [disabled]="cannotCreate || cannotRemove">{{ willAdd ? 'Add' : 'Delete' }}</ion-button>
+    </div>
+  </div>
+
+</ion-content>

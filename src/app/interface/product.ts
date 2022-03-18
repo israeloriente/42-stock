@@ -6,5 +6,6 @@ export interface Product {
     // Colums
     name: string,
     barcodeId: string,
+    qtd: number,
     get?(value: string)
 }

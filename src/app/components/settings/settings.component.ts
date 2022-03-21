@@ -14,6 +14,7 @@ import { QrBannerComponent } from './qr-banner/qr-banner.component';
 export class SettingsComponent {
 
   public user: User;
+  public isAdmin: boolean = false;
 
   constructor(
     public db: BackendService,
@@ -22,9 +23,13 @@ export class SettingsComponent {
     public AC: AppComponent,
   ) { }
 
-  async ngOnInit() {
+  /**
+    * Trigger every time the user views the page.
+  */
+   ionViewWillEnter() {
     this.db.getCurrentUser().then((user: User) => {
       this.user = user;
+      this.db.userIsAdm().then((res) => this.isAdmin = (res == 'admin') ? true : false);
     });
   }
 

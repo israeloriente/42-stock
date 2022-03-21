@@ -28,7 +28,7 @@
       </div>
       <!-- Options -->
         <p class="section">OPTIONS</p>
-        <ion-item (click)="openBanner()" button>
+        <ion-item (click)="openBanner()" button *ngIf="isAdmin">
           <ion-label> Create qr_banner </ion-label>
           <ion-icon name="qr-code-outline" slot="end"></ion-icon>
         </ion-item>

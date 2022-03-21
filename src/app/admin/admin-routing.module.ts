@@ -6,7 +6,7 @@ import { AdminPage } from './admin.page';
 import { CooperatorComponent } from './cooperator/cooperator.component';
 import { MailComponent } from './mail/mail.component';
 import { ProductComponent } from './product/product.component';
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from '../components/settings/settings.component';
 
 const routes: Routes = [
   {

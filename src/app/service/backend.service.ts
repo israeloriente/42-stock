@@ -236,6 +236,18 @@ export class BackendService {
   }
 
 
+  /**  
+    * Get any config data from db.
+    * @params Key config
+    * @returns Value of key param.
+  */
+  // @@@@@@@@@@@@@@@@@@@@ Parse Config @@@@@@@@@@@@@@@@@@@@
+  public async getParseConfig(key: string) {
+    const config = await Parse.Config.get();
+    return config.get(key);
+  }
+
+
   // @@@@@@@@@@@@@@@@@@@@ Parse Validators @@@@@@@@@@@@@@@@@@@@
   public erroValidators(error: any) {
     // retornamos o valor porque podemos querer mostrar alem do toast

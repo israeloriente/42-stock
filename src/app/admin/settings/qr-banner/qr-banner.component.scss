@@ -1,0 +1,60 @@
+// Used only in example banner
+.banner {
+    width: 280px;
+    max-height: 250px;
+    border: 1px solid;
+    display: block;
+    margin: 5% auto;
+    border-radius: 10px;
+    position: relative;
+    img {
+        width: 80px;
+        margin: 5%;
+    }
+    #qrCode {
+        position: absolute;
+        right: 0%;
+    }
+    #spinner {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+    }
+    p {
+        text-align: center;
+        margin: 0% 5% 7% 5%;
+        font-size: 30px;
+    }
+}
+
+// List to print
+.scrolling-wrapper {
+    display: flex;
+    width: auto;
+    height: auto;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 3% 0% 3% 3%;
+    // Remover marca do scroll
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    #contentToConvert {
+        width: 595px;
+        height: 842px;
+        #banners {
+            width: 280px;
+            max-height: 250px;
+            border: 1px solid;
+            display: block;
+            margin: 3%;
+            border-radius: 10px;
+            position: relative;
+            img {
+                width: 50px;
+                margin: 5%;
+            }
+        }        
+    }
+}

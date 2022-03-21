@@ -11,6 +11,7 @@ import { ProductComponent } from './product/product.component';
 import { CooperatorComponent } from './cooperator/cooperator.component';
 import { MailComponent } from './mail/mail.component';
 import { SettingsComponent } from './settings/settings.component';
+import { QrBannerComponent } from './settings/qr-banner/qr-banner.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SettingsComponent } from './settings/settings.component';
     ProductComponent,
     CooperatorComponent,
     MailComponent,
-    SettingsComponent
+    SettingsComponent,
+    QrBannerComponent
   ]
 })
 export class AdminPageModule {}

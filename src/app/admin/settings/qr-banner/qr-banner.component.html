@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button (click)="modal.dismiss()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Print Tag</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!descriptionIsValid" (click)="generatePDF()">Print</ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="banner">
+    <img src="../../../../assets/icon/logo.png" alt="">
+    <img [src]="url" id="qrCode">
+    <ion-spinner id="spinner" *ngIf="!url"></ion-spinner>
+    <p [ngStyle]="{'font-size': fontSizeAjust }"> {{ description || 'Your message here...' }} </p>
+  </div>
+
+  <div style="text-align: center;">
+    <ion-button color="dark" [disabled]="print.length == 1" (click)="print.pop()">-</ion-button>
+    <ion-button color="dark" [disabled]="print.length == 3" (click)="print.push({description: description, url: url})">+</ion-button>
+  </div>
+
+  <ion-item>
+    <ion-label float>Description</ion-label>
+    <ion-textarea [(ngModel)]="description"
+      maxlength="100"
+      placeholder="Your message here..."
+      rows="3"></ion-textarea>
+  </ion-item>
+
+  <div class="scrolling-wrapper">
+    <div id="contentToConvert" *ngIf="printing">
+      <div class="banner" id="banners" *ngFor="let i of print">
+        <img src="../../../../assets/icon/logo.png" alt="">
+        <img [src]="url" id="qrCode">
+        <ion-spinner id="spinner" *ngIf="!url"></ion-spinner>
+        <p [ngStyle]="{'font-size': teste }"> {{ description || 'Your message here...' }} </p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

@@ -5,7 +5,7 @@
     * @returns 'admin' | 'cooperator'.
 */
 async function userIsAdm(request) {
-    if (!request.user) throw new Error( 'No_session');
+    if (!request.user) throw new Error( 'no_session');
     var queryRole = new Parse.Query(Parse.Role);
     queryRole.equalTo('name', 'Admin');
     var role = await queryRole.first({ useMasterKey: true });
@@ -21,7 +21,7 @@ async function userIsAdm(request) {
     * @returns Object Destroyed.
 */
 async function createUser(request) {
-    if (!request.user) throw new Error( 'No_session');
+    if (!request.user) throw new Error( 'no_session');
     // Check current user permission
     if (await userIsAdm(request) != 'admin') throw new Error( 'Permission denied 😅');
     const data = request.params;
@@ -39,7 +39,7 @@ async function createUser(request) {
     * @returns Object Destroyed.
 */
 async function destroyUser(request) {
-    if (!request.user) throw new Error( 'No_session');
+    if (!request.user) throw new Error( 'no_session');
     // Check current user permission
     if (await userIsAdm(request) != 'admin') throw new Error( 'Permission denied 😅');
     const User = new Parse.User();
@@ -48,8 +48,21 @@ async function destroyUser(request) {
     return await user.destroy({useMasterKey: true});
 }
 
+
+/**  
+    * Get email list (Master key)
+    * @returns Emails alert list.
+*/
+async function getEmailList() {
+    const Mail = Parse.Object.extend('Mail');
+    const query = new Parse.Query(Mail);
+    query.limit(500);
+    return await query.find({useMasterKey: true});
+}
+
 module.exports = {
     userIsAdm,
     createUser,
-    destroyUser
+    destroyUser,
+    getEmailList
 };

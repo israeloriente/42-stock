@@ -1,10 +1,15 @@
 var parse = require("./parse-service");
+var mail = require("./email-service");
 
 
 //                                      @@@@@@@@@@@@@@@@@@@@ USER @@@@@@@@@@@@@@@@@@@@
 Parse.Cloud.define("userIsAdm", async (request) => { return await parse.userIsAdm(request)});
 Parse.Cloud.define("createUser", async (request) => { return await parse.createUser(request)});
 Parse.Cloud.define("destroyUser", async (request) => { return await parse.destroyUser(request)});
+
+//                                      @@@@@@@@@@@@@@@@@@@@ EMAIL SERVICE @@@@@@@@@@@@@@@@@@@@
+Parse.Cloud.define("reportFromStudent", async (request) => { return await mail.reportFromStudent(request)});
+Parse.Cloud.define("reportFromCooperator", async (request) => { return await mail.reportFromCooperator(request)});
 
 
 //                                      @@@@@@@@@@@@@@@@@@@@ EVENTS HOOKS @@@@@@@@@@@@@@@@@@@@
@@ -22,6 +27,7 @@ Parse.Cloud.beforeSave("Product", (request) => {
     const ACL = new Parse.ACL();
     ACL.setRoleReadAccess('Admin', true);
     ACL.setRoleWriteAccess('Admin', true);
+    ACL.setPublicReadAccess(true);
     request.object.setACL(ACL);
 });
 // Define Mail ACL

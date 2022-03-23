@@ -7,5 +7,6 @@ export interface Product {
     name: string,
     barcodeId: string,
     qtd: number,
+    isChecked?: boolean,
     get?(value: string)
 }

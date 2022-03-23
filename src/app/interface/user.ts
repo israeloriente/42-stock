@@ -6,5 +6,6 @@ export interface User {
     username?: string;
     // Colums
     name: string,
-    email: string
+    email: string,
+    get?(value: string)
 }

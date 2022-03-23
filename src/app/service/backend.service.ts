@@ -3,6 +3,7 @@ import { Parse } from "parse";
 import { environment } from "../../environments/environment";
 import { Mail } from "../interface/mail";
 import { Product } from "../interface/product";
+import { Report } from "../interface/report";
 import { User } from "../interface/user";
 import { GlobalService } from "./global.service";
 
@@ -36,6 +37,21 @@ export class BackendService {
     email: usr.email,
   }) }
   /**  
+  * Send email report for 42 staff.
+  * @param report - Report Object
+  * @returns OK.
+  */
+  public async reportFromStudent(report: Report) { return await Parse.Cloud.run('reportFromStudent', {
+    selected: report.selected.map((item) => item.get('name')),
+    description: report.description
+  }) }
+  /**  
+  * Send email report for 42 staff (systemReport).
+  * * @param report - Report Object
+  * @returns OK.
+  */
+  public async reportFromSystem(report: Report) { return await Parse.Cloud.run('reportFromSystem', {
+    selected: report.selected.map((item) => item.get('name'))
   * Destroy User from Database.
   * @returns Parse Object User destroyed.
   */

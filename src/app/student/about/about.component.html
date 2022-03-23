@@ -1,0 +1,34 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>About</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <ion-header collapse="condense" class="ion-no-border">
+    <ion-toolbar>
+      <p class="titleHome">About</p>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" class="limitScreen">
+    <!-- IMG ICON -->
+    <img src="../../../assets/icon/logo.png" style="width: 100px; display: block; margin: 3% auto;"/>
+    <!-- ITEMS -->
+    <ion-item>
+      <ion-label>Project</ion-label>
+      <ion-label slot="end">42-stock</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Version</ion-label>
+      <ion-label slot="end"> v{{AC.versionApp}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <div>
+        <h4>Description</h4>
+        <p>The goal of 42 solutions is to apply the knowledge from the clubs to real projects that will help us in our daily lives.</p>
+      </div>
+    </ion-item>
+  </div>
+</ion-content>

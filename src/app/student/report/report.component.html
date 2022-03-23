@@ -1,0 +1,47 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Notify 42</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-header collapse="condense" class="ion-no-border">
+    <ion-toolbar>
+      <p class="titleHome">Notify 42</p>
+    </ion-toolbar>
+  </ion-header>
+  <div class="limitScreen">
+
+    <!-- PRODUCT  -->
+    <div style="height: 40vh; text-align: center; margin: 3% 0%">
+      <ion-spinner *ngIf="!product?.length && product == undefined"></ion-spinner>
+      <p *ngIf="!product?.length && product != undefined">No data</p>
+
+      <ion-list>
+        <ion-item *ngFor="let p of product">
+          <ion-label>{{p.get('name')}}</ion-label>
+          <ion-checkbox slot="end" color="dark" [(ngModel)]="p.isChecked" (ionChange)="checkboxChanged(p)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- DESCRIPTION -->
+    <ion-item>
+      <ion-label color="dark" position="floating">Description*</ion-label>
+      <ion-textarea rows="5" [(ngModel)]="report.description" placeholder="Tell us where is the place with missing material"></ion-textarea>
+    </ion-item>
+
+    <!-- SUBMIT -->
+    <div style="text-align: center; padding: 5%;">
+      <ion-button
+        color="dark"
+        fill="outline"
+        size="large"
+        expand="block"
+       [disabled]="!reportIsValid"
+       (click)="notify42()"
+        > SEND </ion-button>
+    </div>
+
+  </div>
+</ion-content>
+

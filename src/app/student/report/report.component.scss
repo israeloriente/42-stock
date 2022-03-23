@@ -1,0 +1,25 @@
+ion-spinner {
+    display: block;
+    margin: auto;
+    height: 40vh;
+    position: relative;
+}
+ion-list {
+    height: 40vh;
+    margin-top: 1vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    // Remover scroll view
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    ion-item {
+        --min-height: 0;
+        ion-checkbox {
+            margin: 0%;
+        }
+        ion-label {
+            margin: 2%;
+        }
+    }
+}

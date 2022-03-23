@@ -35,6 +35,7 @@ export class GlobalService {
   }
 
   /**  
+   * Shows message in toast for user.
     * @param message - The first input is the message to present.
     * @param time - The second input define the time (ms)
     * @returns NULL
@@ -47,6 +48,21 @@ export class GlobalService {
     });
     toast.present();
   }
+  /**
+    * Shows alert message for user.
+    * @param header - Header is the title of alert.
+    * @param message - Message is the description of alert.
+    * @returns NULL
+  */
+  async showAlert(header: string, message: string) {
+  const alert = await this.alert.create({
+    header: header,
+    message: message,
+    buttons: ['Ok']
+  });
+  await alert.present();
+  return await alert.onWillDismiss();
+}
 
   /**  
     * @param title - Title message.

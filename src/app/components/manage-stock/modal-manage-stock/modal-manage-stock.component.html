@@ -13,7 +13,9 @@
       <ion-progress-bar color="primary" [value]="percent"></ion-progress-bar>
       <p style="text-align: center;">{{sent}} of {{qtd}}</p>
     </div>
-    <app-verified-svg class="centralizeTotal" *ngIf="verified"></app-verified-svg>
+
+    <app-verified-svg *ngIf="verified"></app-verified-svg>
+
   </div>
 
   <!-- Div define quantity  -->

@@ -36,7 +36,14 @@
 }
 
 .limitScreen {
-    max-width: 1000px;
+    max-width: 768px;
     display: block;
     margin: auto;
 }
+
+.titleHome {
+    font-size: 30px;
+    margin: 0%;
+    margin-left: 2vw;
+    font-weight: 600;
+  }

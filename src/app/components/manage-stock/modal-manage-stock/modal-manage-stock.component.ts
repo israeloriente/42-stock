@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Product } from 'src/app/interface/product';
 import { BackendService } from 'src/app/service/backend.service';
+import { GlobalService } from 'src/app/service/global.service';
 
 @Component({
   selector: 'app-modal-manage-stock',
@@ -26,7 +27,8 @@ export class ModalManageStockComponent implements OnInit {
   constructor(
     private db: BackendService,
     public modal: ModalController,
-    private params: NavParams
+    private params: NavParams,
+    private global: GlobalService
   ) { }
 
   /** * Run only one time after constructor load */
@@ -53,14 +55,36 @@ export class ModalManageStockComponent implements OnInit {
             .catch(() => this.erros++);
         }
       }
-      this.waitAnimationAndClose();
+      this.closeModalandCheckStock();
     }
   }
   /**
-    * Wait for the animation to run and close modal
+    * Wait for the animation, close modal and check stock
   */
-  private waitAnimationAndClose() {
-    setTimeout(() => this.modal.dismiss(this.erros), 1000);
+  private closeModalandCheckStock() {
+    setTimeout(() => {
+      // Close modal
+      this.modal.dismiss(this.erros);
+      // Check if is last stock
+      if (this.willRemove && (this.product.qtd - this.sent < 1))
+        // Ask if user wish send report
+        this.global.confirmAlert(
+          'This was the last product available',
+          'Do you want to report?',
+          'No, thanks','Yes').then((res) => {
+            if (res) {
+              // SEND
+              this.global.loadInit();
+              this.db.reportFromCooperator(this.product).then(() => {
+                this.global.showToast('Report Sent!');
+                this.global.loadEnd();
+              }).catch((error) => {
+                this.global.showToast(this.db.erroValidators(error));
+                this.global.loadEnd();
+              });
+            }
+        });
+    }, 1000);
   }
 
   /** * True if the component's action is to add */

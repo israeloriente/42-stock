@@ -50,8 +50,10 @@ export class BackendService {
   * * @param report - Report Object
   * @returns OK.
   */
-  public async reportFromSystem(report: Report) { return await Parse.Cloud.run('reportFromSystem', {
-    selected: report.selected.map((item) => item.get('name'))
+  public async reportFromCooperator(product: Product) { return await Parse.Cloud.run('reportFromCooperator', {
+    selected: [product.get('name')]
+  }) }
+  /**  
   * Destroy User from Database.
   * @returns Parse Object User destroyed.
   */

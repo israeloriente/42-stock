@@ -22,8 +22,11 @@
       </ion-item>
       <ion-item>
         <ion-label>Barcode</ion-label>
-          <ion-input #barcode [(ngModel)]="product.barcodeId" (keyup.enter)="saveObject()"></ion-input>
-          <!-- <ion-button>scan</ion-button> -->
+          <ion-input #barcode [(ngModel)]="product.barcodeId"
+            (ionFocus)="focusedInBarcodeInput()"
+            (ionBlur)="blurBarcodeInput()"
+            (keyup.enter)="saveObject()">
+          </ion-input>
       </ion-item>
     </ion-list>
   </div>

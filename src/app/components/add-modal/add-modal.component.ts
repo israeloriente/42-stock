@@ -4,6 +4,7 @@ import { Mail } from 'src/app/interface/mail';
 import { Product } from 'src/app/interface/product';
 import { User } from 'src/app/interface/user';
 import { BackendService } from 'src/app/service/backend.service';
+import { Events } from 'src/app/service/events';
 import { GlobalService } from 'src/app/service/global.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class AddModalComponent {
     public modal: ModalController,
     private global: GlobalService,
     private params: NavParams,
+    private ev: Events
   ) {
 
   this.type = this.params.get('type');
@@ -108,6 +110,23 @@ export class AddModalComponent {
         this.global.loadEnd();
         break;
     }
+  }
+
+  /**
+   * When barcodeInput lose focus.
+  */
+  public focusedInBarcodeInput() {
+    //  ZEBRA subscribe event
+    this.ev.subscribe('data:scan', async (data: any) => {
+      let codeScanned = data.scanData.extras["com.symbol.datawedge.data_string"];
+      this.product.barcodeId = codeScanned;
+    });
+  }
+  /**
+   * When barcodeInput init focus.
+  */
+  public blurBarcodeInput() {
+    this.ev.destroy('data:scan')
   }
 
 }

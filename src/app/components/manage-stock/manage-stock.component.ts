@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Product } from 'src/app/interface/product';
 import { BackendService } from 'src/app/service/backend.service';
+import { Events } from 'src/app/service/events';
 import { GlobalService } from 'src/app/service/global.service';
 import { ModalManageStockComponent } from './modal-manage-stock/modal-manage-stock.component';
 
@@ -18,20 +19,36 @@ export class ManageStockComponent {
     private db: BackendService,
     private modal: ModalController,
     private global: GlobalService,
-    public actionSheetController: ActionSheetController
+    public actionSheetController: ActionSheetController,
+    public ev: Events
   ) { }
 
   /**
     * Trigger every time the user views the page.
   */
-  ionViewWillEnter() { this.getProduct() }
+  ionViewWillEnter() {
+    //  ZEBRA subscribe event
+    this.ev.subscribe('data:scan', async (data: any) => {
+      let codeScanned = data.scanData.extras["com.symbol.datawedge.data_string"];
+      // Get data scanned and check if exist product
+      let product = this.products.filter((product) => product.get('barcodeId') == codeScanned )[0];
+      // If exist open ask else show not found
+      product ? this.askAction(product) : this.global.showToast('Product not found');
+    });
+    // Get products from db.
+    this.getProduct();
+  }
+  /**
+    * Trigger every time the user views the page.
+  */
+  ionViewWillLeave() { this.ev.destroy('data:scan') }
 
   /**
     * Determines whether to Restock or to Use.
     * Case select someone will open openManageModal.
     * @param product - Product Parse Object.
   */
-  async presentActionSheet(product: Product) {
+  async askAction(product: Product) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Action',
       buttons: [
@@ -40,17 +57,13 @@ export class ManageStockComponent {
           role: 'destructive',
           icon: 'share-outline',
           id: 'delete-button',
-          handler: () => {
-            this.openManageModal(product, 'rm');
-          }
+          handler: () => { this.openManageModal(product, 'rm') }
         },
         {
           text: 'Restock',
           icon: 'download-outline',
           id: 'delete-button',
-          handler: () => {
-            this.openManageModal(product, 'add');
-          }
+          handler: () => { this.openManageModal(product, 'add') }
         },
         {
           text: 'Cancel',

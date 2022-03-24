@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BackendService } from './service/backend.service';
+import { DeviceService } from './service/device.service';
 import { GlobalService } from './service/global.service';
 
 @Component({
@@ -14,11 +15,14 @@ export class AppComponent {
   
   constructor(
     private db: BackendService,
-    private global: GlobalService
+    private global: GlobalService,
+    private device: DeviceService
   ) {
     
     // If there is a user session let´s redirect to admin, or go to public component
     this.db.getCurrentUser().then((user) => user ? this.global.goToRoot('admin') : this.global.goToRoot('student') );
+    // Init Zebra
+    this.device.initZebra();
 
   }
 }

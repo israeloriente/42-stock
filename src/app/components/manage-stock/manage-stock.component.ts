@@ -72,9 +72,12 @@ export class ManageStockComponent {
       for (let i = 0; i < products.length; i++) {
         this.db.countStock(this.products[i]).then((qtd: number) => {
           this.products[i].qtd = qtd;
+        }).catch((error) => {
+          this.products[i].qtd = 0;
+          this.global.showToast(this.db.erroValidators(error), 5000);
         });
       }
-    })
+    }).catch((error) => this.global.showToast(this.db.erroValidators(error), 5000));
   }
 
   /**

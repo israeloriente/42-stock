@@ -27,6 +27,10 @@ export class BackendService {
   }
 
   //                           @@@@@@@@@@@@@@@@@@@@ Parse CLOUD @@@@@@@@@@@@@@@@@@@@
+  /**  
+    * Check if user is Admin
+    * @returns 'admin' | 'cooperator'.
+  */
   async userIsAdm() { return await Parse.Cloud.run('userIsAdm') }
   /**  
   * Create User from Database.
@@ -89,16 +93,16 @@ export class BackendService {
   */
   async logout(confirm?) {
     if (confirm) {
-      this.global.confirmAlert('Are you sure?', 'Your session will be terminated', 'Leave', 'Cancel').then((response: boolean) => {
+      this.global.confirmAlert('Are you sure?', 'Your session will be terminated', 'Cancel', 'Leave').then((response: boolean) => {
         if (response) {
           Parse.User.logOut();
-          this.global.goTo('login');
+          this.global.goToRoot('login');
           this.global.resetStorage();
         }
       });
     } else {
       Parse.User.logOut();
-      this.global.goTo('login');
+      this.global.goToRoot('login');
       this.global.resetStorage();
     }
   }
@@ -267,7 +271,7 @@ export class BackendService {
 
 
   // @@@@@@@@@@@@@@@@@@@@ Parse Validators @@@@@@@@@@@@@@@@@@@@
-  public erroValidators(error: any) {
+  public erroValidators(error: any): string {
     // retornamos o valor porque podemos querer mostrar alem do toast
     switch (error.message) {
       case 'XMLHttpRequest failed: "Unable to connect to the Parse API"':
@@ -283,12 +287,19 @@ export class BackendService {
       case 'Account already exists for this username.':
         return 'Account already exists for this username.';
       case 'Permission denied, user needs to be authenticated.':
+        this.logout(false);
         return 'You must be logged in';
+      case 'Invalid session token':
+        this.logout(false);
+        return 'Invalid session token';
       case 'no_session':
         this.logout(false);
         return 'You must be logged in';
       default:
-        if (error.code == 119) return 'Permission denied 😅';
+        if (error.code == 119) {
+          this.logout(false);
+          return 'Permission denied 😅';
+        }
         return error.message;
     }
   }

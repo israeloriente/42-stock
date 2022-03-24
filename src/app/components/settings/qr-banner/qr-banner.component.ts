@@ -62,7 +62,7 @@ export class QrBannerComponent implements OnInit {
         pdf.save('printF.pdf');
         this.printing = false;
       });
-    }, 10);
+    }, 100);
   }
 
   /**  

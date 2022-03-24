@@ -8,8 +8,6 @@ import { CooperatorPageRoutingModule } from './cooperator-routing.module';
 
 import { CooperatorPage } from './cooperator.page';
 
-import { SettingsComponent } from '../components/settings/settings.component';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -18,8 +16,7 @@ import { SettingsComponent } from '../components/settings/settings.component';
     CooperatorPageRoutingModule
   ],
   declarations: [
-    CooperatorPage,
-    SettingsComponent
+    CooperatorPage
   ]
 })
 export class CooperatorPageModule {}

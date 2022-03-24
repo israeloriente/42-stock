@@ -21,7 +21,7 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private db: BackendService,
-    private global: GlobalService
+    public global: GlobalService
   ) { }
 
   ngOnInit() {

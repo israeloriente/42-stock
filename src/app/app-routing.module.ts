@@ -6,7 +6,7 @@ import { StudentPageModule } from './student/student.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'student',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {

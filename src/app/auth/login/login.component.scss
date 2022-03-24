@@ -1,0 +1,24 @@
+ion-content{
+    --background: #000000;
+    ion-card {
+        width: 87%;
+        max-width: 350px;
+        border-radius: 20px;
+        padding: 20px;
+        h1 {
+            font-size: 28px;
+            color: black;
+            font-weight: bold;
+            margin-top: 10%;
+        }
+        p {
+            text-align: center;
+            cursor: pointer;
+        }
+        ion-button {
+            padding: 1% 5%;
+            margin-top: 5%;
+        }
+    }
+
+}

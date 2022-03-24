@@ -1,0 +1,44 @@
+<ion-content>
+
+    <div *ngIf="statusComponent == 'login' ">
+<!-- @@@@@@@@@@@@@@@@@@@@ LOGIN DIV @@@@@@@@@@@@@@@@@@@@ -->
+      <ion-card class="centralizeTotal">
+        <h1>Stock App</h1>
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input type="email" (keyup.enter)="pass.setFocus()" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input #pass type="password" (keyup.enter)="login()" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+        <!-- Login Button -->
+        <ion-button size="large" expand="block" (click)="login()" [disabled]="!user.email || !user.password">
+          <div>Login</div>
+        </ion-button>
+
+        <p (click)="statusComponent = 'reset'">Forgot password?</p>
+        <p (click)="global.goTo('student')">Public access</p>
+      </ion-card>
+    </div>
+
+<!-- @@@@@@@@@@@@@@@@@@@@ RESET PASSWORD DIV @@@@@@@@@@@@@@@@@@@@ -->
+    <div *ngIf="statusComponent == 'reset' ">
+      <ion-card class="centralizeTotal">
+        <h1>Recover</h1>
+        <ion-item class="ion-no-padding" style="margin-bottom: 10%;">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" (keyup.enter)="recoveryPassword()" [(ngModel)]="user.email"
+          onkeypress="return event.charCode != 32"></ion-input>
+        </ion-item>
+  
+        <ion-button size="large" expand="block" color="dark" (click)="recoveryPassword()">
+          <div>Reset</div>
+        </ion-button>
+        <p (click)="statusComponent = 'login';">Back</p>
+      </ion-card>
+    </div>
+
+
+
+</ion-content>

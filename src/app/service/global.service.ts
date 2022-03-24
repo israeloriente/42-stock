@@ -21,7 +21,13 @@ export class GlobalService {
     * @param url - Router.
     * @returns NULL.
   */
-  public goTo(url) { this.nav.navigateForward(url) }
+  public goTo(url) { this.nav.navigateForward(url); }
+  /**  
+    * Navigate between pages with Angular Router (ROOT)
+    * @param url - Router.
+    * @returns NULL.
+  */
+  public goToRoot(url) { this.nav.navigateRoot(url) }
 
   async loadInit() {
     this.loading = await this.load.create({

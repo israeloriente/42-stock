@@ -48,7 +48,7 @@ export class ProductComponent {
     * Call up object creation / update modal
     * @param product - Existent product to update.
   */
-  public async openModal(product?) {
+  public async openModal(product?: Product) {
     if (!this.blockModal && !this.select) {
       const modal = await this.modal.create({
         component: AddModalComponent,

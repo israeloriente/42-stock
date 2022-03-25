@@ -4,5 +4,6 @@ export interface Mail {
     createdAt?: Date;
     updatedAt?: Date;
     // Colums
-    email: string
+    email: string,
+    get?(value: string)
 }

@@ -42,7 +42,7 @@
         <img src="../../../../assets/icon/logo.png" alt="">
         <img [src]="url" id="qrCode">
         <ion-spinner id="spinner" *ngIf="!url"></ion-spinner>
-        <p [ngStyle]="{'font-size': teste }"> {{ description || 'Your message here...' }} </p>
+        <p [ngStyle]="{'font-size': fontSizeAjust }"> {{ description || 'Your message here...' }} </p>
       </div>
     </div>
   </div>

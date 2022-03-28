@@ -1,6 +1,6 @@
 {
   "name": "42-stock",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.0",
   "author": "42_Lisboa_Solutions",
   "scripts": {
     "ng": "ng",

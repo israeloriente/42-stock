@@ -1,0 +1,580 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>42-stock documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">42-stock documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >BarcodeProvider</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/providers/barcode/barcode.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#events" >events</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#requestResultCodes" >requestResultCodes</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#requestResult" >requestResult</a>
+                            </li>
+                            <li>
+                                <a href="#sendCommand" >sendCommand</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(events: <a href="../injectables/Events.html" target="_self">Events</a>, platform: Platform)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/providers/barcode/barcode.ts:8</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>events</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/Events.html" target="_self" >Events</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>platform</td>
+                                                  
+                                                        <td>
+                                                                    <code>Platform</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestResult"></a>
+                    <span class="name">
+                        <span ><b>requestResult</b></span>
+                        <a href="#requestResult"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>requestResult(requestCodes: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/app/providers/barcode/barcode.ts:78</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>requestCodes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendCommand"></a>
+                    <span class="name">
+                        <span ><b>sendCommand</b></span>
+                        <a href="#sendCommand"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sendCommand(extraName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, extraValue)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/app/providers/barcode/barcode.ts:86</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>extraName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>extraValue</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="events"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>events</b></span>
+                        <a href="#events"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/Events.html" target="_self" >Events</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/providers/barcode/barcode.ts:10</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestResultCodes"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>requestResultCodes</b></span>
+                        <a href="#requestResultCodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;false&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/providers/barcode/barcode.ts:8</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Events } from &#x27;../../service/events&#x27;;
+import { Platform } from &#x27;@ionic/angular&#x27;;
+
+@Injectable()
+export class BarcodeProvider {
+
+  private requestResultCodes &#x3D; &quot;false&quot;;
+
+  constructor(public events: Events, private platform: Platform) {
+    this.platform.ready().then((readySource) &#x3D;&gt; {
+
+      if (this.platform.is(&quot;capacitor&quot;)) {
+        let constructorInstance &#x3D; this;
+
+      //  The Datawedge service will respond via implicit broadcasts intents.  
+      //  Responses may be the result of calling the Datawedge API or may be because a barcode was scanned
+      //  Set up a broadcast receiver to listen for incoming scans
+      (&lt;any&gt;window).plugins.intentShim.registerBroadcastReceiver({
+        filterActions: [
+          &#x27;iot.orientech.stock.ACTION&#x27;,           //  Response from scan (needs to match value in output plugin)
+          &#x27;com.symbol.datawedge.api.RESULT_ACTION&#x27;//  Response from DataWedge service (as defined by API)
+        ],
+        filterCategories: [
+          &#x27;android.intent.category.DEFAULT&#x27;
+        ]
+      },
+        function (intent) {
+          //  Broadcast received
+          console.log(&#x27;Received Intent: &#x27; + JSON.stringify(intent.extras));
+  
+          //  Emit a separate event for the result associated with this scan.  This will only be present in response to
+          //  API calls which included a SEND_RESULT extra
+          if (intent.extras.hasOwnProperty(&#x27;RESULT_INFO&#x27;)) {
+            let commandResult &#x3D; intent.extras.RESULT + &quot; (&quot; +
+              intent.extras.COMMAND.substring(intent.extras.COMMAND.lastIndexOf(&#x27;.&#x27;) + 1, intent.extras.COMMAND.length) + &quot;)&quot;;  // + JSON.stringify(intent.extras.RESULT_INFO);
+            constructorInstance.events.publish(&#x27;data:commandResult&#x27;, commandResult.toLowerCase());
+          }
+  
+          if (intent.extras.hasOwnProperty(&#x27;com.symbol.datawedge.api.RESULT_GET_VERSION_INFO&#x27;)) {
+            //  The version has been returned (DW 6.3 or higher).  Includes the DW version along with other subsystem versions e.g MX  
+            var versionInfo &#x3D; intent.extras[&#x27;com.symbol.datawedge.api.RESULT_GET_VERSION_INFO&#x27;];
+            console.log(&#x27;Version Info: &#x27; + JSON.stringify(versionInfo));
+            let datawedgeVersion &#x3D; versionInfo[&#x27;DATAWEDGE&#x27;];
+            console.log(&quot;Datawedge version: &quot; + datawedgeVersion);
+  
+            //  Fire events sequentially so the application can gracefully degrade the functionality available on earlier DW versions
+            if (datawedgeVersion &gt;&#x3D; &quot;6.3&quot;)
+              constructorInstance.events.publish(&#x27;status:dw63ApisAvailable&#x27;, true);
+            if (datawedgeVersion &gt;&#x3D; &quot;6.4&quot;)
+              constructorInstance.events.publish(&#x27;status:dw64ApisAvailable&#x27;, true);
+            if (datawedgeVersion &gt;&#x3D; &quot;6.5&quot;)
+              constructorInstance.events.publish(&#x27;status:dw65ApisAvailable&#x27;, true);
+          }
+          else if (intent.extras.hasOwnProperty(&#x27;com.symbol.datawedge.api.RESULT_ENUMERATE_SCANNERS&#x27;)) {
+            //  Return from our request to enumerate the available scanners
+            let enumeratedScanners &#x3D; intent.extras[&#x27;com.symbol.datawedge.api.RESULT_ENUMERATE_SCANNERS&#x27;];
+            constructorInstance.events.publish(&#x27;data:enumeratedScanners&#x27;, enumeratedScanners);
+          }
+          else if (intent.extras.hasOwnProperty(&#x27;com.symbol.datawedge.api.RESULT_GET_ACTIVE_PROFILE&#x27;)) {
+            //  Return from our request to obtain the active profile
+            let activeProfile &#x3D; intent.extras[&#x27;com.symbol.datawedge.api.RESULT_GET_ACTIVE_PROFILE&#x27;];
+            constructorInstance.events.publish(&#x27;data:activeProfile&#x27;, activeProfile);
+          }
+          else if (!intent.extras.hasOwnProperty(&#x27;RESULT_INFO&#x27;)) {
+            //  A barcode has been scanned
+            constructorInstance.events.publish(&#x27;data:scan&#x27;, {scanData: intent, time: new Date().toLocaleTimeString()});
+          }
+        }
+      );
+      }
+    });
+
+  }
+
+  //  Control whether or not to include the SEND_RESULT extra in our commands to request DW send the
+  //  result back to us.  Only available in DW6.5+
+  requestResult(requestCodes: boolean) {
+    this.requestResultCodes &#x3D; &quot;&quot; + requestCodes;
+  }
+
+  //  Send a broadcast intent to the DW service which is present on all Zebra devcies.
+  //  This functionality requires DW6.3+ as that is the version where the com.symbol.datawedge.api.ACTION
+  //  was introduced.
+  //  extraValue may be a String or a Bundle
+  sendCommand(extraName: string, extraValue) {
+    console.log(&quot;Sending Command: &quot; + extraName + &quot;, &quot; + JSON.stringify(extraValue));
+    (&lt;any&gt;window).plugins.intentShim.sendBroadcast({
+      action: &#x27;com.symbol.datawedge.api.ACTION&#x27;,
+      extras: {
+        [extraName]: extraValue,
+        &quot;SEND_RESULT&quot;: this.requestResultCodes
+      }
+    },
+      function () { },  //  Success in sending the intent, not success of DW to process the intent.
+      function () { }   //  Failure in sending the intent, not failure of DW to process the intent.
+    );
+  }
+
+}
+
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'BarcodeProvider.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

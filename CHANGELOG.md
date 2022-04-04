@@ -1,3 +1,21 @@
+# [1.0.0-beta.1](https://github.com/israeloriente/42-stock/compare/1.0.0-beta.0...1.0.0-beta.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **gh-actions:** revert ([e6d1fb1](https://github.com/israeloriente/42-stock/commit/e6d1fb1c6defd8fb6060df248afb0610ee669059))
+* porra ([a1504d5](https://github.com/israeloriente/42-stock/commit/a1504d55b69866964f5fae2a89b69e55fa9b4b3c))
+* revert main.yml ([120d76b](https://github.com/israeloriente/42-stock/commit/120d76be4422d197cf0fdb425e4a343641e5f959))
+* revert preview ([8d8fdc3](https://github.com/israeloriente/42-stock/commit/8d8fdc30268499251510308ab2b7b33996f6532e))
+* trying resolver actions ([ff7b287](https://github.com/israeloriente/42-stock/commit/ff7b2875067693177c50a654e3d8172fe7347126))
+
+
+### Features
+
+* **actions:** github-pages-deploy-action ([2cb8f25](https://github.com/israeloriente/42-stock/commit/2cb8f2547e9c83f0f15ec2d6c8b49b5286f1486a))
+
+
+
 # 1.0.0-beta.0 (2022-03-28)
 
 

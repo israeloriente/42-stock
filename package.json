@@ -6,10 +6,10 @@
     "ng": "ng",
     "start": "node index.js",
     "build": "ng build",
-    "build-doc": "npm run compodoc",
     "dev:android": "ionic capacitor run android -l --external",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "compodoc": "npx compodoc -p tsconfig.doc.json"
+    "compodoc": "npx compodoc -p tsconfig.doc.json -d docs",
+    "prepare": "npm run changelog && npm run compodoc"
   },
   "private": true,
   "dependencies": {
